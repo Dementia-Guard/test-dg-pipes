@@ -1,19 +1,19 @@
-name: "CI Workflow"
+# name: "CI Workflow"
 
-on:
-  push:
-    branches:
-      - "master"
-  workflow_dispatch:  
+# on:
+#   push:
+#     branches:
+#       - "master"
+#   workflow_dispatch:  
 
-jobs:
-  build-and-test:
-    uses: ./.github/workflows/build-and-test.yaml
+# jobs:
+#   build-and-test:
+#     uses: ./.github/workflows/build-and-test.yaml
 
-  sonar-analysis:
-    uses: ./.github/workflows/sonarqube-analysis.yaml
-    needs: build-and-test
+#   sonar-analysis:
+#     uses: ./.github/workflows/sonarqube-analysis.yaml
+#     needs: build-and-test
 
-  # deploy:
-    # uses: ./deploy-to-cloud-run.yml
-    # needs: sonar-analysis 
+#   # deploy:
+#     # uses: ./deploy-to-cloud-run.yml
+#     # needs: sonar-analysis 

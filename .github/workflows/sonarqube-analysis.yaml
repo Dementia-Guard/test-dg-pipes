@@ -1,7 +1,10 @@
 name: CI with SonarQube
 
 on:
-  workflow_call:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
 
 jobs:
   sonarqube-analysis:
