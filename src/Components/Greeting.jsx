@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Greeting = ({ name }) => {
-    return <h1>Hello, {name}!</h1>;
+const Greeting = () => {
+    return <h1>Hello, World!</h1>;
 };
 
 export default Greeting;

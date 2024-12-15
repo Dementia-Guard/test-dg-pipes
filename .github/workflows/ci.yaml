@@ -7,17 +7,17 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-test:
-    uses: ./.github/workflows/build-and-test.yaml
+  jest-test:
+    uses: ./.github/workflows/jest-test.yaml
 
-  playwright-tests:
+  playwright-test:
     secrets: inherit
-    needs: build-and-test
-    uses: ./.github/workflows/playwright-tests.yaml
+    needs: jest-test
+    uses: ./.github/workflows/playwright-test.yaml
 
   sonar-analysis:
     secrets: inherit
-    needs: playwright-tests
+    needs: playwright-test
     uses: ./.github/workflows/sonarqube-analysis.yaml
 
   # deploy:

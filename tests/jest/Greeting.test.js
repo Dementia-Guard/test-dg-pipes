@@ -4,7 +4,7 @@ import Greeting from '../../src/Components/Greeting';
 import React from 'react';
 
 test('renders a greeting message', () => {
-  render(<Greeting name="World" />);
+  render(<Greeting />);
   const greetingElement = screen.getByText(/Hello, World!/i);
   expect(greetingElement).toBeInTheDocument();
 });
