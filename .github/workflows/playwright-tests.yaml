@@ -1,0 +1,65 @@
+name: Playwright Tests
+
+on:
+  workflow_call:
+
+jobs:
+  # Stage 1: Run Playwright tests
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the code.
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js.
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Step 3: Install dependencies.
+      - name: Install dependencies
+        run: npm ci
+
+      # Step 4: Install Playwright browsers.
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      # Step 5: Run Playwright tests.
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      # Step 6: Upload Playwright report as an artifact.
+      - name: Upload Playwright report as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+  # Stage 2: Upload report to GCS
+  upload:
+    needs: test # Depend on the test job.
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Download Playwright report artifact.
+      - name: Download Playwright report artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: playwright-report
+
+      # Step 2: Authenticate with GCP.
+      - name: Authenticate with GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Upload Playwright Report to GCS
+        uses: 'google-github-actions/upload-cloud-storage@v2'
+        with:
+          path: 'playwright-report/**'
+          destination: 'gs://${{ secrets.GCS_BUCKET_NAME }}/${{ secrets.GCS_BUCKET_FOLDER }}/'

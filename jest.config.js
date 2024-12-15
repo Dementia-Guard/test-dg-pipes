@@ -1,5 +1,7 @@
 const conf = {
     testEnvironment: 'jsdom',
+    testMatch: ["**/tests/jest/**/*.test.[jt]s?(x)"], // Run only Jest tests
+    testPathIgnorePatterns: ["/node_modules/", "/tests/playwright/"], // Ignore Playwright tests
     setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
     moduleNameMapper: {
       '^.+\\.(css|less|scss)$': 'identity-obj-proxy',
