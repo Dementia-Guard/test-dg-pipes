@@ -32,6 +32,9 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
 
+      - name: List Playwright report files
+        run: ls -R playwright-report
+
       # Step 6: Upload Playwright report as an artifact.
       - name: Upload Playwright report as an artifact
         uses: actions/upload-artifact@v4
@@ -62,5 +65,5 @@ jobs:
       - name: Upload Playwright Report to GCS
         uses: 'google-github-actions/upload-cloud-storage@v2'
         with:
-          path: 'playwright-report/**'
+          path: './playwright-report/**'
           destination: 'gs://${{ secrets.GCS_BUCKET_NAME }}/${{ secrets.GCS_BUCKET_FOLDER }}/'
