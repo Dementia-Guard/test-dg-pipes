@@ -36,7 +36,7 @@ jobs:
         #   npm install -g sonar-scanner
         #   sonar-scanner
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: 3d643ded484ddc9634be5929229f76d6ce62dd0f
           SONAR_HOST_URL: https://sonarcloud.io
 
       # Check the Quality Gate status.
