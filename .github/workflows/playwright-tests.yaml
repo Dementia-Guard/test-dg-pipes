@@ -51,6 +51,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: playwright-report
+          path: ./playwright-report
 
       # Step 2: Authenticate with GCP.
       - name: Authenticate with GCP
