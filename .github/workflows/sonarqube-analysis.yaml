@@ -2,6 +2,13 @@ name: CI with SonarQube
 
 on:
   workflow_call:
+    inputs:
+      SONAR_TOKEN:
+        required: true
+        type: string
+      SONAR_HOST_URL:
+        required: true
+        type: string
 
 jobs:
   sonarqube-analysis:
@@ -33,8 +40,8 @@ jobs:
       - name: Run SonarQube analysis
         uses: sonarsource/sonarqube-scan-action@v4
         env:
-          SONAR_TOKEN: "${{ secrets.SONAR_TOKEN }}"
-          SONAR_HOST_URL: "${{ secrets.SONAR_HOST_URL }}"
+          SONAR_TOKEN: "${{ inputs.SONAR_TOKEN }}"
+          SONAR_HOST_URL: "${{ inputs.SONAR_HOST_URL }}"
 
       # Check the Quality Gate status.
       - name: SonarQube Server Quality Gate check
@@ -43,5 +50,5 @@ jobs:
         with:
           pollingTimeoutSec: 600
         env:
-          SONAR_TOKEN: "${{ secrets.SONAR_TOKEN }}"
-          SONAR_HOST_URL: "${{ secrets.SONAR_HOST_URL }}"
+          SONAR_TOKEN: "${{ inputs.SONAR_TOKEN }}"
+          SONAR_HOST_URL: "${{ inputs.SONAR_HOST_URL }}"
