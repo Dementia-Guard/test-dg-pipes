@@ -7,10 +7,10 @@ on:
 
 jobs:
   build-and-test:
-    uses: ./build-and-test.yaml
+    uses: ./.github/workflows/build-and-test.yaml
 
   sonar-analysis:
-    uses: ./sonarqube-analysis.yaml
+    uses: ./.github/workflows/sonarqube-analysis.yaml
     needs: build-and-test
 
   # deploy:
