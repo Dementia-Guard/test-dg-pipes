@@ -1,15 +1,11 @@
 name: CI with SonarQube
 
 on:
-  push:
-    branches:
-      - master
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
   sonarqube-analysis:
     runs-on: ubuntu-latest
-    needs: build-and-test
 
     steps:
       # Step 1: Checkout the code
