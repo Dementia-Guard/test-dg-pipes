@@ -9,6 +9,7 @@ on:
 jobs:
   sonarqube-analysis:
     runs-on: ubuntu-latest
+    needs: build-and-test
 
     steps:
       # Step 1: Checkout the code
